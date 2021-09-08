@@ -1,0 +1,58 @@
+<br><br>
+<a class="btn btn-success" routerLink="/questions/form">Add Question</a>
+<a class="btn btn-primary" routerLink="/quizzes">Quizzes</a>
+<a class="btn btn-primary" routerLink="/play">Play Quiz</a>
+
+<table tableStyle>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>TEXT</th>
+            <th>ANSWER A</th>
+            <th>ANSWER B</th>
+            <th>ANSWER C</th>
+            <th>ANSWER D</th>
+            <th>CORRECT ANSWER</th>
+            <th>QUIZ NAME</th>
+            <th>POINTS</th>
+            <th>MANAGE</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngIf="!page || !page.content">
+            <td colspan="10" class="text-center">Loading data. Please wait...</td>
+        </tr>
+
+        <tr *ngIf="page && page.content && !page.content.length">
+            <td colspan="10" class="text-center">No Data</td>
+        </tr>
+
+        <ng-container *ngIf="page && page.content && page.content.length">
+            <tr *ngFor="let question of page.content; trackBy:question?.id">
+                <td>{{question.id}}</td>
+                <td>{{question.text}}</td>
+                <td>{{question.answerA}}</td>
+                <td>{{question.answerB}}</td>
+                <td>{{question.answerC}}</td>
+                <td>{{question.answerD}}</td>
+                <td>{{question.correctAnswer}}</td>
+                <td>{{question.quiz.name}}</td>
+                <td>{{question.points}}</td>
+                <td>
+                    <a class="btn btn-primary" [routerLink]="['/questions/form', question.id]">Edit</a>
+                    <button type="button" class="btn btn-danger"
+                        (click)="deleteQuestionById(question.id)">Delete</button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<div *ngIf="pageable && page && page.content && page.content.length">
+    <br><br>
+    <app-pagination [pageNumber]="pageable.page" [pageSize]="pageable.size" [pageSort]="pageable.sort"
+        [totalPages]="page.totalPages" [url]="'/questions'">
+    </app-pagination>
+</div>

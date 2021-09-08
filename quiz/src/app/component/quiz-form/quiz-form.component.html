@@ -1,0 +1,30 @@
+<br><br>
+<div *ngIf="!quiz" class="text-center text-white">Loading data. Please wait...</div>
+
+<div *ngIf="quiz">
+    <form #quizForm="ngForm">
+        
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">NAME</label>
+            <div class="col-sm-6">
+                <input id="name" name="name" type="text" class="form-control" #name="ngModel" [(ngModel)]="quiz.name"
+                    required pattern="^[a-zA-z\s]{5,30}$" />
+                <div *ngIf="name.touched && name.invalid" class="text-danger">
+                    <span *ngIf="name.hasError('required')">Please enter a name</span>
+                    <span *ngIf="name.hasError('pattern')">This is not a valid name</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 offset-sm-4">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" *ngIf="!quiz.id" [disabled]="quizForm.invalid"
+                    (click)="saveQuiz()">Save</button>
+                <button type="button" class="btn btn-secondary" *ngIf="quiz.id" [disabled]="quizForm.invalid"
+                    (click)="updateQuiz()">Update</button>
+                <a class="btn btn-light" routerLink="/quizzes">Cancel</a>
+            </div>
+        </div>
+
+    </form>
+</div>

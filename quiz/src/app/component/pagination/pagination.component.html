@@ -1,0 +1,17 @@
+<nav>
+	<ul class="pagination">
+		<li class="page-item" [class.disabled]="pageNumber === 0">
+			<a class="page-link" [queryParams]="{ page: pageNumber - 1, size: pageSize, sort: pageSort }"
+				[routerLink]="[url]">Previous</a>
+		</li>
+
+		<li class="page-item" *ngFor="let number of numbers" [class.active]="number === pageNumber"><a class="page-link"
+				[queryParams]="{ page: number, size: pageSize, sort: pageSort }" [routerLink]="[url]">{{number + 1}}</a>
+		</li>
+
+		<li class="page-item" [class.disabled]="pageNumber === totalPages - 1">
+			<a class="page-link" [queryParams]="{ page: pageNumber + 1, size: pageSize, sort: pageSort }"
+				[routerLink]="[url]">Next</a>
+		</li>
+	</ul>
+</nav>

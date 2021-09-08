@@ -1,0 +1,9 @@
+.answer {
+    background-color: #C0C0C0;
+    height: 40px;
+    padding: 10px;
+  }
+  
+.disable-click {
+    pointer-events: none;
+  }

@@ -1,0 +1,113 @@
+<br><br>
+<div *ngIf="!question || !quizzes" class="text-center text-white">Loading data. Please wait...</div>
+
+<div *ngIf="question && quizzes">
+    <form #questionForm="ngForm">
+
+        <div class="form-group row">
+            <label for="text" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">TEXT</label>
+            <div class="col-sm-6">
+                <input id="text" name="text" type="text" class="form-control" #text="ngModel"
+                    [(ngModel)]="question.text" required pattern="^[a-zA-z\s]{5,}$" />
+                <div *ngIf="text.touched && text.invalid" class="text-danger">
+                    <span *ngIf="text.hasError('required')">Please enter a text</span>
+                    <span *ngIf="text.hasError('pattern')">This is not a valid text</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="answerA" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">ANSWER A</label>
+            <div class="col-sm-6">
+                <input id="answerA" name="answerA" type="text" class="form-control" #answerA="ngModel"
+                    [(ngModel)]="question.answerA" required />
+                <div *ngIf="answerA.touched && answerA.invalid" class="text-danger">
+                    <span *ngIf="answerA.hasError('required')">Please enter an answerA</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="answerB" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">ANSWER B</label>
+            <div class="col-sm-6">
+                <input id="answerB" name="answerB" type="text" class="form-control" #answerB="ngModel"
+                    [(ngModel)]="question.answerB" required />
+                <div *ngIf="answerB.touched && answerB.invalid" class="text-danger">
+                    <span *ngIf="answerB.hasError('required')">Please enter an answerB</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="answerC" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">ANSWER C</label>
+            <div class="col-sm-6">
+                <input id="answerC" name="answerC" type="text" class="form-control" #answerC="ngModel"
+                    [(ngModel)]="question.answerC" required />
+                <div *ngIf="answerC.touched && answerC.invalid" class="text-danger">
+                    <span *ngIf="answerC.hasError('required')">Please enter an answerC</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="answerD" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">ANSWER D</label>
+            <div class="col-sm-6">
+                <input id="answerD" name="answerD" type="text" class="form-control" #answerD="ngModel"
+                    [(ngModel)]="question.answerD" required />
+                <div *ngIf="answerD.touched && answerD.invalid" class="text-danger">
+                    <span *ngIf="answerD.hasError('required')">Please enter an answerD</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="correctAnswer" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">CORRECT
+                ANSWER</label>
+            <div class="col-sm-6">
+                <select id="correctAnswer" name="correctAnswer" class="form-control" #correctAnswer="ngModel"
+                    [(ngModel)]="question.correctAnswer" required>
+                    <option *ngFor="let answer of Answer | toArray : 'string'" [value]="answer">{{answer}}</option>
+                </select>
+                <div *ngIf="correctAnswer.touched && correctAnswer.invalid" class="text-danger">
+                    <span *ngIf="correctAnswer.hasError('required')">Please select a correctAnswer</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="quiz" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">QUIZ</label>
+            <div class="col-sm-6">
+                <select id="quiz" name="quiz" class="form-control" #quiz="ngModel" [(ngModel)]="question.quiz"
+                    [compareWith]="isEqualQuizzes" required>
+                    <option *ngFor="let quiz of quizzes" [ngValue]="quiz">{{quiz.name}}</option>
+                </select>
+                <div *ngIf="quiz.touched && quiz.invalid" class="text-danger">
+                    <span *ngIf="quiz.hasError('required')">Please select a quiz</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="points" class="col-sm-2 offset-sm-2 col-form-label text-right text-white">POINTS</label>
+            <div class="col-sm-6">
+                <select id="points" name="points" class="form-control" #points="ngModel" [(ngModel)]="question.points"
+                    required>
+                    <option *ngFor="let points of Points | toArray : 'number'" [value]="points">{{points}}</option>
+                </select>
+                <div *ngIf="points.touched && points.invalid" class="text-danger">
+                    <span *ngIf="points.hasError('required')">Please select points</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 offset-sm-4">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" *ngIf="!question.id" [disabled]="questionForm.invalid"
+                    (click)="saveQuestion()">Save</button>
+                <button type="button" class="btn btn-secondary" *ngIf="question.id" [disabled]="questionForm.invalid"
+                    (click)="updateQuestion()">Update</button>
+                <a class="btn btn-light" routerLink="/questions">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

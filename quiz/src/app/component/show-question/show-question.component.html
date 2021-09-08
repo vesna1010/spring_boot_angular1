@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-sm-12">
+        <br> <br>
+        <h3 class="text-center" [class.text-white]="!answer"
+            [class.text-success]="answer && answer === question.correctAnswer"
+            [class.text-danger]="answer && answer !== question.correctAnswer">{{answer ? (answer ===
+            question.correctAnswer ? 'CORRECT' : 'INCORRECT') : question.text }}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <br> <br> <br>
+    <div class="col-sm-4 offset-sm-2">
+        <div class="answer" [class.disable-click]="answer"
+            [class.bg-success]="answer && question.correctAnswer === Answer.A"
+            [class.bg-danger]="answer && answer === Answer.A && answer !== question.correctAnswer"
+            (click)="checkAnswer(Answer.A)">
+            <span class="float-left">A</span>
+            <div class="text-center">{{question.answerA}}</div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="answer" [class.disable-click]="answer"
+            [class.bg-success]="answer && question.correctAnswer === Answer.B"
+            [class.bg-danger]="answer && answer === Answer.B && answer !== question.correctAnswer"
+            (click)="checkAnswer(Answer.B)">
+            <span class="float-left">B</span>
+            <div class="text-center">{{question.answerB}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <br> <br> <br>
+    <div class="col-sm-4 offset-sm-2">
+        <div class="answer" [class.disable-click]="answer"
+            [class.bg-success]="answer && question.correctAnswer === Answer.C"
+            [class.bg-danger]="answer && answer === Answer.C && answer !== question.correctAnswer"
+            (click)="checkAnswer(Answer.C)">
+            <span class="float-left">C</span>
+            <div class="text-center">{{question.answerC}}</div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="answer" [class.disable-click]="answer"
+            [class.bg-success]="answer && question.correctAnswer === Answer.D"
+            [class.bg-danger]="answer && answer === Answer.D && answer !== question.correctAnswer"
+            (click)="checkAnswer(Answer.D)">
+            <span class="float-left">D</span>
+            <div class="text-center">{{question.answerD}}</div>
+        </div>
+    </div>
+</div>
