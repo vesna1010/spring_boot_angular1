@@ -31,34 +31,34 @@ public class QuestionController {
 
 	@GetMapping
 	public Page<Question> findAllQuestions(
-			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable) {
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) final Pageable pageable) {
 		return questionService.findAllQuestions(pageable);
 	}
 
 	@GetMapping("/quiz/{id}")
-	public List<Question> findQuestionsByQuizId(@PathVariable Long id, @RequestParam Integer size) {
+	public List<Question> findQuestionsByQuizId(@PathVariable final Long id, @RequestParam final Integer size) {
 		return questionService.findQuestionsByQuizIdAndOfSize(id, size);
 	}
 
 	@GetMapping("/{id}")
-	public Question findQuestionById(@PathVariable Long id) {
+	public Question findQuestionById(@PathVariable final Long id) {
 		return questionService.findQuestionById(id);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Question saveQuestion(@RequestBody Question question) {
+	public Question saveQuestion(@RequestBody final Question question) {
 		return questionService.saveQuestion(question);
 	}
 
 	@PutMapping("/{id}")
-	public Question updateQuestion(@RequestBody Question question, @PathVariable Long id) {
+	public Question updateQuestion(@RequestBody final Question question, @PathVariable final Long id) {
 		return questionService.updateQuestion(question, id);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteQuestionById(@PathVariable Long id) {
+	public void deleteQuestionById(@PathVariable final Long id) {
 		questionService.deleteQuestionById(id);
 	}
 
