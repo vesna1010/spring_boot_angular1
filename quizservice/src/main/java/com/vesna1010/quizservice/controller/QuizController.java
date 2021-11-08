@@ -28,29 +28,29 @@ public class QuizController {
 	private QuizService quizService;
 
 	@GetMapping
-	public List<Quiz> findAllQuizzes(@SortDefault(sort = "id", direction = Direction.ASC) Sort sort) {
+	public List<Quiz> findAllQuizzes(@SortDefault(sort = "id", direction = Direction.ASC) final Sort sort) {
 		return quizService.findAllQuizzes(sort);
 	}
 
 	@GetMapping("/{id}")
-	public Quiz findQuizById(@PathVariable Long id) {
+	public Quiz findQuizById(@PathVariable final Long id) {
 		return quizService.findQuizById(id);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Quiz saveQuiz(@RequestBody Quiz quiz) {
+	public Quiz saveQuiz(@RequestBody final Quiz quiz) {
 		return quizService.saveQuiz(quiz);
 	}
 
 	@PutMapping("/{id}")
-	public Quiz updateQuiz(@RequestBody Quiz quiz, @PathVariable Long id) {
+	public Quiz updateQuiz(@RequestBody final Quiz quiz, @PathVariable final Long id) {
 		return quizService.updateQuiz(quiz, id);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteQuizById(@PathVariable Long id) {
+	public void deleteQuizById(@PathVariable final Long id) {
 		quizService.deleteQuizById(id);
 	}
 
