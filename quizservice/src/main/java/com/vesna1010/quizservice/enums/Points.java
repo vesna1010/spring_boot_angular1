@@ -8,7 +8,11 @@ import com.vesna1010.quizservice.converter.StringToPointsConverter;
 @JsonSerialize(converter = PointsToIntegerConverter.class)
 @JsonDeserialize(converter = StringToPointsConverter.class)
 public enum Points {
-	TEN(10), TWENTY(20), FIFTY(50), HUNDRED(100);
+	
+	TEN(10), 
+	TWENTY(20), 
+	FIFTY(50), 
+	HUNDRED(100);
 
 	private Integer points;
 
