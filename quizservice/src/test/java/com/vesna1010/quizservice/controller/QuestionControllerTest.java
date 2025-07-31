@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -47,11 +46,11 @@ public class QuestionControllerTest extends BaseControllerTest {
 				.param("size", "2")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			   .andExpect(jsonPath("$", hasSize(3)))
-			   .andExpect(jsonPath("$[0].text", is("Question A")))
-			   .andExpect(jsonPath("$[1].text", is("Question B")))
-			   .andExpect(jsonPath("$[2].text", is("Question C")));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$", hasSize(3)))
+		       .andExpect(jsonPath("$[0].text", is("Question A")))
+		       .andExpect(jsonPath("$[1].text", is("Question B")))
+		       .andExpect(jsonPath("$[2].text", is("Question C")));
 
 		verify(questionService, times(1)).findQuestionsByQuizIdAndOfSize(1L, 2);
 	}
@@ -71,13 +70,13 @@ public class QuestionControllerTest extends BaseControllerTest {
 				.param("sort", "id")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			   .andExpect(jsonPath("$.number", is(0)))
-			   .andExpect(jsonPath("$.size", is(5)))
-			   .andExpect(jsonPath("$.totalPages", is(1)))
-			   .andExpect(jsonPath("$.numberOfElements", is(2)))
-			   .andExpect(jsonPath("$.content[0].text", is("Question A")))
-			   .andExpect(jsonPath("$.content[1].text", is("Question B")));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$.number", is(0)))
+		       .andExpect(jsonPath("$.size", is(5)))
+		       .andExpect(jsonPath("$.totalPages", is(1)))
+		       .andExpect(jsonPath("$.numberOfElements", is(2)))
+		       .andExpect(jsonPath("$.content[0].text", is("Question A")))
+		       .andExpect(jsonPath("$.content[1].text", is("Question B")));
 
 		verify(questionService, times(1)).findAllQuestions(PAGEABLE);
 	}
@@ -91,8 +90,8 @@ public class QuestionControllerTest extends BaseControllerTest {
 				get("/questions/1")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			   .andExpect(jsonPath("$.text", is("Question")));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$.text", is("Question")));
 
 		verify(questionService, times(1)).findQuestionById(1L);
 	}
@@ -111,8 +110,8 @@ public class QuestionControllerTest extends BaseControllerTest {
 				.content(OBJECT_MAPPER.writeValueAsString(question))
 				)
 		       .andExpect(status().isCreated())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			   .andExpect(jsonPath("$.id", is(1)));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$.id", is(1)));
 
 		verify(questionService, times(1)).saveQuestion(question);
 	}
@@ -130,8 +129,8 @@ public class QuestionControllerTest extends BaseControllerTest {
 				.content(OBJECT_MAPPER.writeValueAsString(question))
 				)
 		       .andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.text", is("Question")));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$.text", is("Question")));
 
 		verify(questionService, times(1)).updateQuestion(question, 1L);
 	}
