@@ -36,10 +36,10 @@ public class QuizControllerTest extends BaseControllerTest {
 				get("/quizzes")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			   .andExpect(jsonPath("$", hasSize(2)))
-			   .andExpect(jsonPath("$[0].name", is("Quiz A")))
-			   .andExpect(jsonPath("$[1].name", is("Quiz B")));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$", hasSize(2)))
+		       .andExpect(jsonPath("$[0].name", is("Quiz A")))
+		       .andExpect(jsonPath("$[1].name", is("Quiz B")));
 
 		verify(quizService, times(1)).findAllQuizzes(SORT);
 	}
@@ -52,8 +52,8 @@ public class QuizControllerTest extends BaseControllerTest {
 				get("/quizzes/1")
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			   .andExpect(jsonPath("$.name", is("Quiz")));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$.name", is("Quiz")));
 
 		verify(quizService, times(1)).findQuizById(1L);
 	}
@@ -69,9 +69,9 @@ public class QuizControllerTest extends BaseControllerTest {
 			    .contentType(MediaType.APPLICATION_JSON)
 				.content(OBJECT_MAPPER.writeValueAsString(quiz))
 				)
-		        .andExpect(status().isCreated())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.id", is(1)));
+		       .andExpect(status().isCreated())
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$.id", is(1)));
 
 		verify(quizService, times(1)).saveQuiz(quiz);
 	}
@@ -88,8 +88,8 @@ public class QuizControllerTest extends BaseControllerTest {
 				.content(OBJECT_MAPPER.writeValueAsString(quiz))
 				)
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			   .andExpect(jsonPath("$.name", is("Quiz")));
+		       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		       .andExpect(jsonPath("$.name", is("Quiz")));
 
 		verify(quizService, times(1)).updateQuiz(quiz, 1L);
 	}
